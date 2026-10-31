@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mirror Windows</title>
+<link rel="icon" href="../icons/32.png">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main>
+  <h1 data-i18n="optionsTitle"></h1>
+  <section>
+    <h2 data-i18n="welcomePreviewsTitle"></h2>
+    <p data-i18n="welcomePreviews"></p>
+    <button id="previews"></button>
+    <p class="status" id="previews-status"></p>
+  </section>
+  <section>
+    <label class="row"><input type="checkbox" id="followFocus"><span data-i18n="optFollowFocus"></span></label>
+  </section>
+  <section>
+    <p data-i18n="optNoShotSites"></p>
+    <textarea id="noShotSites" spellcheck="false"></textarea>
+    <p><button id="save" data-i18n="save"></button> <span class="status" id="saved"></span></p>
+  </section>
+  <section>
+    <ul>
+      <li data-i18n="tipToolbar"></li>
+      <li data-i18n="tipBookmark"></li>
+    </ul>
+  </section>
+</main>
+<script src="i18n.js"></script>
+<script src="previews.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

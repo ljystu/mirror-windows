@@ -1,0 +1,71 @@
+{
+  "name": {
+    "message": "Mirror Windows"
+  },
+  "description": {
+    "message": "Every window shows the same tabs. Open a tab in any window and the live page moves there, typing, scroll and video intact."
+  },
+  "actionTitle": {
+    "message": "Mirror Windows: click to turn syncing on or off"
+  },
+  "debugCommand": {
+    "message": "Open the debug page"
+  },
+  "badgeOff": {
+    "message": "OFF"
+  },
+  "menuBlankWindow": {
+    "message": "New window that isn't mirrored"
+  },
+  "welcomeTitle": {
+    "message": "Mirror Windows is on"
+  },
+  "welcomeLead": {
+    "message": "Every Chrome window now shows the same tabs, in the same order."
+  },
+  "welcomeHow": {
+    "message": "Each page is one live tab. Open it in any window and that same page moves there, with your typing, scroll position and video. The other windows keep a stand-in tab for it."
+  },
+  "welcomePreviewsTitle": {
+    "message": "Page previews"
+  },
+  "welcomePreviews": {
+    "message": "With previews on, a stand-in shows a blurred picture of its page. Chrome asks for access to all sites because taking that picture needs it. The pictures never leave your computer and are deleted when the browser closes. Without it, stand-ins are plain dark grey."
+  },
+  "previewsOn": {
+    "message": "Turn on page previews"
+  },
+  "previewsAreOn": {
+    "message": "Page previews are on."
+  },
+  "previewsOff": {
+    "message": "Turn off page previews"
+  },
+  "welcomeTipsTitle": {
+    "message": "Good to know"
+  },
+  "tipToolbar": {
+    "message": "Click the toolbar button to turn mirroring off or on. Right-click it for a window that isn't mirrored."
+  },
+  "tipBookmark": {
+    "message": "Bookmark or copy a page's address from the window where it is live: a stand-in's address is the extension's own."
+  },
+  "openSettings": {
+    "message": "Settings"
+  },
+  "optionsTitle": {
+    "message": "Mirror Windows settings"
+  },
+  "optFollowFocus": {
+    "message": "Bring the page over when its window gets focus. Off: only clicking the page or its tab does."
+  },
+  "optNoShotSites": {
+    "message": "Never take previews of these sites (one per line, e.g. mybank.com):"
+  },
+  "optSaved": {
+    "message": "Saved."
+  },
+  "save": {
+    "message": "Save"
+  }
+}

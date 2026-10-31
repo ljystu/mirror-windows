@@ -1,0 +1,71 @@
+{
+  "name": {
+    "message": "Mirror Windows 镜像窗口"
+  },
+  "description": {
+    "message": "所有窗口显示同一组 tab。在哪个窗口点开，同一个活页面就移到哪个窗口，输入、滚动位置和视频都保留。"
+  },
+  "actionTitle": {
+    "message": "Mirror Windows：点击开关同步"
+  },
+  "debugCommand": {
+    "message": "打开调试页面"
+  },
+  "badgeOff": {
+    "message": "关"
+  },
+  "menuBlankWindow": {
+    "message": "打开一个不镜像的新窗口"
+  },
+  "welcomeTitle": {
+    "message": "Mirror Windows 已开启"
+  },
+  "welcomeLead": {
+    "message": "现在每个 Chrome 窗口都显示同样的标签页，顺序也一样。"
+  },
+  "welcomeHow": {
+    "message": "每个页面只有一个活的标签。在哪个窗口打开，这个页面就移到哪个窗口，打了一半的字、滚动位置和视频都跟着走。其他窗口里放着它的替身标签。"
+  },
+  "welcomePreviewsTitle": {
+    "message": "页面预览"
+  },
+  "welcomePreviews": {
+    "message": "开启预览后，替身标签会显示页面的模糊截图。截图需要“所有网站”的访问权限，所以 Chrome 会询问。截图只存在你的电脑上，关闭浏览器时删除。不开启的话，替身是纯深灰色。"
+  },
+  "previewsOn": {
+    "message": "开启页面预览"
+  },
+  "previewsAreOn": {
+    "message": "页面预览已开启。"
+  },
+  "previewsOff": {
+    "message": "关闭页面预览"
+  },
+  "welcomeTipsTitle": {
+    "message": "小提示"
+  },
+  "tipToolbar": {
+    "message": "点工具栏按钮可以关闭或开启镜像。右键点它可以打开一个不镜像的窗口。"
+  },
+  "tipBookmark": {
+    "message": "收藏或复制网址请在页面所在的窗口里操作：替身标签的地址是扩展自己的地址。"
+  },
+  "openSettings": {
+    "message": "设置"
+  },
+  "optionsTitle": {
+    "message": "Mirror Windows 设置"
+  },
+  "optFollowFocus": {
+    "message": "窗口获得焦点时就把页面切过来。关闭后：只有点击页面或它的标签才会切过来。"
+  },
+  "optNoShotSites": {
+    "message": "这些网站不截图预览（每行一个，例如 mybank.com）："
+  },
+  "optSaved": {
+    "message": "已保存。"
+  },
+  "save": {
+    "message": "保存"
+  }
+}
