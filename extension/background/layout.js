@@ -17,8 +17,8 @@ async function saveLayout() {
   const order = [...new Set([...ordered, ...Object.keys(state.vtabs)])].filter((v) => state.vtabs[v]);
   const vtabs = {};
   for (const v of order) {
-    const { url, title, pinned, group } = state.vtabs[v];
-    vtabs[v] = { url, title, pinned, group: group || null };
+    const { url, title, pinned, group, sid } = state.vtabs[v];
+    vtabs[v] = { url, title, pinned, group: group || null, ...(sid ? { sid } : {}) };
   }
   await chrome.storage.local.set({ layout: { order, vtabs, nextVid: state.nextVid, groups: state.groups, nextGid: state.nextGid } });
 }

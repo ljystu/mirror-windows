@@ -9,6 +9,7 @@
 //                            Cmd+Shift+T can turn into its page again
 //   state.groups / gmap      shared tab groups (see groups.js)
 //   state.excluded           windows opened as "not mirrored" (until the browser closes)
+//   state.sbind / spos       saved tabs (see saved.js)
 
 // One object for the whole lifetime of the service worker; reset in place, never replaced,
 // so every module sees the same state.
@@ -16,7 +17,7 @@ export const state = {};
 let loaded = false;
 
 export function freshState() {
-  return { enabled: true, nextVid: 1, vtabs: {}, ph: {}, parked: {}, closed: {}, known: [], excluded: [], nextGid: 1, groups: {}, gmap: {} };
+  return { enabled: true, nextVid: 1, vtabs: {}, ph: {}, parked: {}, closed: {}, known: [], excluded: [], nextGid: 1, groups: {}, gmap: {}, sbind: {}, spos: {} };
 }
 export function resetState(next = freshState()) {
   for (const k of Object.keys(state)) delete state[k];

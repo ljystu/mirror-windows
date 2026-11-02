@@ -67,5 +67,11 @@
   },
   "save": {
     "message": "Save"
+  },
+  "optSavedTabs": {
+    "message": "Tabs in a group go back to the page they had when they joined the group"
+  },
+  "optSavedTabsHelp": {
+    "message": "When you collapse a group, its tabs go back to their first page (not loaded until you open them). A group you close and open again from Chrome's saved groups also opens at the first pages. Closing a single tab closes it as usual. Only the address is kept, not what you typed or scrolled."
   }
 }
