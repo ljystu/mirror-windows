@@ -4,6 +4,7 @@
 export const settings = {
   followFocus: true, // a window getting focus brings the page there (off: only a click does)
   noShotSites: [],   // host names never pictured (their stand-ins stay dark grey)
+  savedTabs: false,  // group tabs go back to their first page when collapsed or closed (saved.js)
 };
 export const previews = { allowed: false };
 

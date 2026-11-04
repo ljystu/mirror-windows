@@ -67,5 +67,11 @@
   },
   "save": {
     "message": "保存"
+  },
+  "optSavedTabs": {
+    "message": "group 里的标签回到它刚放进 group 时的页面"
+  },
+  "optSavedTabsHelp": {
+    "message": "折叠 group 时，里面的标签回到最初的页面（点开时才加载）。整个 group 关闭后，从 Chrome 的已保存分组再打开，也是最初的页面。单独关掉一个标签就是正常关闭。只保留网址，不保留页面里输入的内容和滚动位置。"
   }
 }

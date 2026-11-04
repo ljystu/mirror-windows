@@ -9,7 +9,7 @@
 //   state.js   state, event queue, persistence      tabs.js    tab/window helpers
 //   layout.js  restore / rebuild / new windows       mirror.js  switching, sharing, closing
 //   shots.js   pictures for the stand-ins            groups.js  tab groups
-//   debug.js   the debug page's data
+//   debug.js   the debug page's data       saved.js   group tabs keep their first page (optional)
 import { state, flags, run, log, coldStart } from './state.js';
 import { restore, rebuild, turnOff, ensureWindow } from './layout.js';
 import { pull, maybePullActive, handBack, closeVtab, unshare, adopt, claimStray, noteWindowBorn, noteTabBorn } from './mirror.js';
@@ -23,6 +23,7 @@ import { startShotLoop, clearShots, forgetShot } from './shots.js';
 import { onTabGroupChanged, onGroupUpdated, onGroupRemoved, pruneGroups } from './groups.js';
 import { alignWindows } from './order.js';
 import { debugDump } from './debug.js';
+import { onSavedRemoved, openLazy, noteUrl, rebind, toPlain, toMirror } from './saved.js';
 
 // ---------- start-up ----------
 
@@ -35,6 +36,7 @@ async function startUp() {
   state.enabled = enabled !== false;
   if (state.enabled) await restore();
   await updateBadge();
+  await rebind();
 }
 run(startUp, 'startup');
 
@@ -64,6 +66,8 @@ chrome.storage.onChanged.addListener((changes, area) => {
   run(async () => {
     await refreshed;
     for (const [vid, vt] of Object.entries(state.vtabs)) if (!mayPicture(vt.url)) await forgetShot(vid);
+    // Group tabs keeping their first page switched on: pick up the group tabs open now.
+    if (!changes.settings.oldValue?.savedTabs && changes.settings.newValue?.savedTabs) await rebind();
   }, 'settings');
 });
 
@@ -71,8 +75,8 @@ chrome.storage.onChanged.addListener((changes, area) => {
 chrome.action.onClicked.addListener(() => run(async () => {
   state.enabled = !state.enabled;
   await chrome.storage.local.set({ enabled: state.enabled });
-  if (state.enabled) await rebuild();
-  else await turnOff();
+  if (state.enabled) { await rebuild(); toMirror(); }
+  else { await toPlain(); await turnOff(); }
   await updateBadge();
 }, 'toggle'));
 
@@ -105,6 +109,7 @@ chrome.tabs.onCreated.addListener((tab) => run(async () => {
 
 chrome.tabs.onRemoved.addListener((tabId, info) => run(async () => {
   if (selfRemoved.delete(tabId)) return;
+  if (await onSavedRemoved(tabId, info)) return; // a group tab comes back instead
   if (!state.enabled || flags.suppressAll) return;
   if (state.ph[tabId]) {
     const vid = state.ph[tabId];
@@ -171,6 +176,7 @@ chrome.tabs.onActivated.addListener(({ tabId, windowId }) => run(async () => {
 }, 'activated'));
 
 chrome.tabs.onUpdated.addListener((tabId, change, tab) => run(async () => {
+  if (change.url) await noteUrl(tabId, tab);
   if (!state.enabled || flags.suppressAll) return;
   if ('groupId' in change) await onTabGroupChanged(tabId);
   const vid = vidOfReal(tabId);
@@ -246,6 +252,17 @@ function alignSoon(windowId) {
 chrome.runtime.onMessage.addListener((msg, sender, reply) => {
   if (msg?.type === 'ready' && sender.tab) {
     markReady(sender.tab.id); // right away, not queued: a pull may be waiting on it
+    return;
+  }
+  if (msg?.type === 'openSaved' && sender.tab) {
+    // An unloaded saved tab asks for its page: it is showing, or you clicked it.
+    run(async () => {
+      if (!msg.explicit) {
+        const t = await chrome.tabs.get(sender.tab.id).catch(() => null);
+        if (!t || !t.active || !(await chrome.windows.get(t.windowId)).focused) return;
+      }
+      await openLazy(sender.tab.id);
+    }, 'open saved');
     return;
   }
   if (msg?.type === 'dump') {

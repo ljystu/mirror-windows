@@ -10,6 +10,7 @@ import { captureShot, refreshTarget, hasFreshShot, pauseShots, forgetShot } from
 import { settings } from './settings.js';
 import { gidFor, pruneGroups, applyGroup } from './groups.js';
 import { alignWindows } from './order.js';
+import { takeOver } from './saved.js';
 
 export async function pull(phTabId, why = '', focusWin) {
   const t0 = performance.now();
@@ -210,6 +211,7 @@ export async function adopt(tab) {
   const vid = String(state.nextVid++);
   // A link opened from a grouped tab lands in that group.
   state.vtabs[vid] = { realTabId: tab.id, ...snapshotOf(fresh), group: fresh.pinned ? null : await gidFor(fresh.groupId) };
+  takeOver(tab.id, state.vtabs[vid]); // a saved tab from a window that isn't mirrored
   const src = await getWin(fresh.windowId);
   for (const w of await syncedWindows()) {
     if (w.id !== fresh.windowId) await createPlaceholder(w.id, vid, anchorIndex(w, src, vid));
